@@ -1,0 +1,53 @@
+<div class="container mt-5 col-md-8 m-auto">
+  <form class="d-flex flex-row mb-5" action="/" method="POST">
+    <div class="category-group input-group" style="width:400px;margin:0 auto">
+      <select class="form-select col" id="categoryId" name="categoryId" onchange="this.form.submit()" required>
+        <option selected disabled hidden>請選擇</option>
+        {{#each category}}
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </form>
+  
+  <div class="container text-center d-flex justify-content-between mb-3">
+    <h3>總金額：</h3>
+    <p class="text-danger fs-1" id="totalAmount">{{sum}}</p>
+  </div>
+
+  <div>
+    <ul class="list-group">
+      {{#each expenseTrack}}
+      <li class="list-group-item justify-content-between mb-3">
+        <div class="row justify-content-between">
+          <div class="col">
+            <div class="d-flex flex-nowrap align-items-center">
+              <div>
+                <i class="{{this.categoryId.icon}} me-3 fa-2xl"></i>
+              </div>
+              <div class="justify-content-between">
+                <h3 class="card-title mb-1 text-secondary ">{{this.event}}</h3>
+                <p class="card-title mb-1 text-secondary fs-6">{{this.date}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <h1 class="card-title mb-1 text-secondary ">{{this.money}}</h1>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-success" href="./expenseTrack/{{ this._id }}/edit">edit</a>
+            <form action="./expenseTrack/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button class="btn btn-danger" type="submit">delete</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {{/each}}
+      <a href="/expenseTrack/new" class="btn btn-primary mb-3">Create</a>
+    </ul>
+    
+  </div>
+
+  
+
+</div>
